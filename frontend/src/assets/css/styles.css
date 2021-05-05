@@ -21,6 +21,7 @@ html, body {
 .footer {
     flex-shrink: 0;
     text-align: center;
+    color: #F44336, #E91E63, #9C27B0;
 }
 
 .bg-primary {
