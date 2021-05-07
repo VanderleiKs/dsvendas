@@ -1,6 +1,10 @@
 package com.vanderleiks.backend.services;
 
+import java.util.List;
+
 import com.vanderleiks.backend.dto.SaleDTO;
+import com.vanderleiks.backend.dto.SaleSuccessDTO;
+import com.vanderleiks.backend.dto.SaleSumDTO;
 import com.vanderleiks.backend.repositories.SaleRepository;
 import com.vanderleiks.backend.repositories.SellerRepository;
 
@@ -22,5 +26,17 @@ public class SaleService {
     public Page<SaleDTO> findAll(Pageable pageable) {
         sellerRepository.findAll();
         return saleRepository.findAll(pageable).map(sale -> new SaleDTO(sale));
+    }
+
+    @Transactional(readOnly = true)
+    public List<SaleSumDTO> findAmountGrupedBySeller() {
+        sellerRepository.findAll();
+        return saleRepository.findAmountGrupedBySeller();
+    }
+
+    @Transactional(readOnly = true)
+    public List<SaleSuccessDTO> findsuccessGrupedBySeller() {
+        sellerRepository.findAll();
+        return saleRepository.findsuccessGrupedBySeller();
     }
 }

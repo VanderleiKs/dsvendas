@@ -1,6 +1,10 @@
 package com.vanderleiks.backend.controllers;
 
+import java.util.List;
+
 import com.vanderleiks.backend.dto.SaleDTO;
+import com.vanderleiks.backend.dto.SaleSuccessDTO;
+import com.vanderleiks.backend.dto.SaleSumDTO;
 import com.vanderleiks.backend.services.SaleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +27,22 @@ public class SaleController {
 
     @GetMapping
     public ResponseEntity<Page<SaleDTO>> findPageable(
-        @RequestParam(name = "page", defaultValue = "0") int page,
-        @RequestParam(name = "size", defaultValue = "10") int size,
-        @RequestParam(name = "sort", defaultValue = "DESC") String sort,
-        @RequestParam(name = "orderBy", defaultValue = "date") String orderBy
-    ){
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size,
+            @RequestParam(name = "sort", defaultValue = "DESC") String sort,
+            @RequestParam(name = "orderBy", defaultValue = "date") String orderBy) {
         Pageable pageable = PageRequest.of(page, size, Direction.valueOf(sort), orderBy);
         return ResponseEntity.ok(saleService.findAll(pageable));
     }
-    
 
-    
-    
+    @GetMapping("/amountbyseller")
+    public ResponseEntity<List<SaleSumDTO>> findAmountOrderedBySeller() {
+        return ResponseEntity.ok(saleService.findAmountGrupedBySeller());
+    }
+
+    @GetMapping("/successbyseller")
+    public ResponseEntity<List<SaleSuccessDTO>> findsuccessGrupedBySeller() {
+        return ResponseEntity.ok(saleService.findsuccessGrupedBySeller());
+    }
+
 }
