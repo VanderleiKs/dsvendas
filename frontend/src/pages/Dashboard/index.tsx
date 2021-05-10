@@ -13,7 +13,7 @@ const Dashboard = () => {
                     <BarChart />
                 </div>
                 <div className="col-sm-6">
-                    <h5 className="text-center text-secundary">Participação nas venda</h5>
+                    <h5 className="text-center text-secundary">Participação nas vendas</h5>
                     <DonutChart />
                 </div>
             </div>
